@@ -1,56 +1,53 @@
-/**
- * Planet Data in Professional English
- */
+// قاعدة بيانات الكواكب
 const planetsData = {
-    sun: { n: "The Sun", d: "0 km", m: "N/A", t: "5,500°C", tx: "The heart of our solar system, a massive star providing light and energy to all planets." },
-    mercury: { n: "Mercury", d: "58M km", m: "0", t: "167°C", tx: "The smallest planet and the closest to the Sun, completing an orbit in just 88 days." },
-    venus: { n: "Venus", d: "108M km", m: "0", t: "464°C", tx: "Earth's 'evil twin' with a thick atmosphere that traps heat, making it the hottest planet." },
-    earth: { n: "Earth", d: "150M km", m: "1", t: "15°C", tx: "Our home, the only planet known to support life, with vast oceans and a protective atmosphere." },
-    mars: { n: "Mars", d: "228M km", m: "2", t: "-65°C", tx: "The Red Planet, home to Olympus Mons, the largest volcano in the entire solar system." },
-    jupiter: { n: "Jupiter", d: "778M km", m: "95", t: "-110°C", tx: "A massive gas giant, so large that all other planets in the solar system could fit inside it." },
-    saturn: { n: "Saturn", d: "1.4B km", m: "146", t: "-140°C", tx: "Famous for its spectacular ring system composed of billions of ice and rock particles." },
-    uranus: { n: "Uranus", d: "2.8B km", m: "27", t: "-195°C", tx: "An ice giant that tilts so far on its axis that it actually orbits the Sun on its side." },
-    neptune: { n: "Neptune", d: "4.5B km", m: "14", t: "-201°C", tx: "The most distant planet, known for its deep blue color and supersonic, freezing winds." }
+    sun: { n: "الشمس", d: "0 كم", m: "0", t: "5,500°C", tx: "نجم النظام الشمسي الذي يمدنا بالضوء والحرارة." },
+    mercury: { n: "عطارد", d: "58 مليون كم", m: "0", t: "167°C", tx: "أصغر كوكب وأقربها للشمس، سطحه مليء بالفوهات." },
+    venus: { n: "الزهرة", d: "108 مليون كم", m: "0", t: "464°C", tx: "كوكب بركاني غلافه الجوي يحبس الحرارة بشكل هائل." },
+    earth: { n: "الأرض", d: "150 مليون كم", m: "1", t: "15°C", tx: "كوكب الحياة، يتميز بوجود الماء السائل وغلاف جوي مثالي." },
+    mars: { n: "المريخ", d: "228 مليون كم", m: "2", t: "-65°C", tx: "الكوكب الأحمر، يحتوي على جبال وبراكين هي الأضخم في النظام." },
+    jupiter: { n: "المشتري", d: "778 مليون كم", m: "95", t: "-110°C", tx: "أكبر كواكب المجموعة الشمسية وهو عملاق غازي." },
+    saturn: { n: "زحل", d: "1.4 مليار كم", m: "146", t: "-140°C", tx: "يتميز بنظام حلقاته الجليدية الرائع وأقماره الكثيرة." },
+    uranus: { n: "أورانوس", d: "2.8 مليار كم", m: "27", t: "-195°C", tx: "عملاق جليدي بارد يميل محور دورانه بشكل جانبي." },
+    neptune: { n: "نبتون", d: "4.5 مليار كم", m: "14", t: "-201°C", tx: "أبعد كوكب، لونه أزرق عميق ورياحه شديدة القوة." }
 };
 
 /**
- * Update and Show Side Panel
+ * وظيفة عرض بيانات الكوكب في اللوحة الجانبية
+ * @param {string} id - معرف الكوكب المختار
  */
 function showPlanet(id) {
     const data = planetsData[id];
-    if(!data) return;
-
+    
+    // تحديث المحتوى النصي داخل اللوحة
     document.getElementById('p-name').innerText = data.n;
     document.getElementById('p-dist').innerText = data.d;
     document.getElementById('p-moons').innerText = data.m;
     document.getElementById('p-temp').innerText = data.t;
     document.getElementById('p-desc').innerText = data.tx;
     
+    // إظهار اللوحة بإضافة الكلاس النشط
     document.getElementById('side-panel').classList.add('active');
-
-    // Subtle vibration feedback
-    if (navigator.vibrate) navigator.vibrate(10);
 }
 
 /**
- * Initialize Background Stars
+ * توليد النجوم بشكل عشوائي في الخلفية عند تحميل الصفحة
  */
-function initStars() {
-    const field = document.getElementById('star-field');
-    const count = window.innerWidth < 768 ? 100 : 250;
+const field = document.getElementById('star-field');
+for(let i=0; i<250; i++) {
+    let s = document.createElement('div');
+    s.style.position = 'absolute';
     
-    field.innerHTML = ''; // Clear for resize
-    for(let i=0; i < count; i++) {
-        const s = document.createElement('div');
-        s.className = 'star';
-        const size = Math.random() * 2 + 'px';
-        s.style.width = size; s.style.height = size;
-        s.style.left = Math.random() * 100 + '%';
-        s.style.top = Math.random() * 100 + '%';
-        s.style.setProperty('--duration', (Math.random() * 3 + 2) + 's');
-        field.appendChild(s);
-    }
+    // أحجام عشوائية للنجوم
+    let size = Math.random() * 2 + 'px';
+    s.style.width = size; 
+    s.style.height = size;
+    
+    s.style.background = '#fff'; 
+    // مواقع عشوائية
+    s.style.left = Math.random() * 100 + '%';
+    s.style.top = Math.random() * 100 + '%'; 
+    // شفافية عشوائية لإعطاء عمق
+    s.style.opacity = Math.random();
+    
+    field.appendChild(s);
 }
-
-window.onload = initStars;
-window.onresize = initStars;
