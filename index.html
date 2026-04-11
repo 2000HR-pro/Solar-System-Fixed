@@ -1,51 +1,61 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Cosmic Explorer | Interactive Solar System</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>المستكشف الكوني | Mini Dashboard</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
     <div id="star-field"></div>
 
-    <div class="solar-system-container">
-        <div class="solar-system">
-            <div class="sun" onclick="showPlanet('sun')"></div>
+    <div class="solar-system">
+        <div class="sun" onclick="showPlanet('sun')"></div>
 
-            <div class="orbit mercury-orb"><div class="planet-container"><div class="planet mercury" onclick="showPlanet('mercury')"></div></div></div>
-            <div class="orbit venus-orb"><div class="planet-container"><div class="planet venus" onclick="showPlanet('venus')"></div></div></div>
-            <div class="orbit earth-orb"><div class="planet-container"><div class="planet earth" onclick="showPlanet('earth')"></div></div></div>
-            <div class="orbit mars-orb"><div class="planet-container"><div class="planet mars" onclick="showPlanet('mars')"></div></div></div>
-            <div class="orbit jupiter-orb"><div class="planet-container"><div class="planet jupiter" onclick="showPlanet('jupiter')"></div></div></div>
-            <div class="orbit saturn-orb"><div class="planet-container"><div class="planet saturn" onclick="showPlanet('saturn')"></div></div></div>
-            <div class="orbit uranus-orb"><div class="planet-container"><div class="planet uranus" onclick="showPlanet('uranus')"></div></div></div>
-            <div class="orbit neptune-orb"><div class="planet-container"><div class="planet neptune" onclick="showPlanet('neptune')"></div></div></div>
+        <div class="orbit" style="width:160px; height:160px; animation-duration: 25s;">
+            <div class="planet-container"><div class="planet mercury" onclick="showPlanet('mercury')"></div></div>
+        </div>
+
+        <div class="orbit" style="width:230px; height:230px; animation-duration: 40s;">
+            <div class="planet-container"><div class="planet venus" onclick="showPlanet('venus')"></div></div>
+        </div>
+
+        <div class="orbit" style="width:310px; height:310px; animation-duration: 60s;">
+            <div class="planet-container"><div class="planet earth" onclick="showPlanet('earth')"></div></div>
+        </div>
+
+        <div class="orbit" style="width:400px; height:400px; animation-duration: 85s;">
+            <div class="planet-container"><div class="planet mars" onclick="showPlanet('mars')"></div></div>
+        </div>
+
+        <div class="orbit" style="width:530px; height:530px; animation-duration: 150s;">
+            <div class="planet-container"><div class="planet jupiter" onclick="showPlanet('jupiter')"></div></div>
+        </div>
+
+        <div class="orbit" style="width:670px; height:670px; animation-duration: 220s;">
+            <div class="planet-container"><div class="planet saturn" onclick="showPlanet('saturn')"></div></div>
+        </div>
+
+        <div class="orbit" style="width:780px; height:780px; animation-duration: 320s;">
+            <div class="planet-container"><div class="planet uranus" onclick="showPlanet('uranus')"></div></div>
+        </div>
+
+        <div class="orbit" style="width:880px; height:880px; animation-duration: 420s;">
+            <div class="planet-container"><div class="planet neptune" onclick="showPlanet('neptune')"></div></div>
         </div>
     </div>
 
     <div id="side-panel">
-        <h1 id="p-name" class="planet-title">Earth</h1>
+        <h1 id="p-name" class="planet-title">الأرض</h1>
         
-        <div class="stats-grid">
-            <div class="data-box">
-                <span class="label">Distance</span>
-                <span class="value" id="p-dist">-</span>
-            </div>
-            <div class="data-box">
-                <span class="label">Moons</span>
-                <span class="value" id="p-moons">-</span>
-            </div>
-            <div class="data-box">
-                <span class="label">Avg Temp</span>
-                <span class="value" id="p-temp">-</span>
-            </div>
-        </div>
+        <div class="data-box"><span class="label">المسافة من الشمس</span><span class="value" id="p-dist">-</span></div>
+        <div class="data-box"><span class="label">الأقمار</span><span class="value" id="p-moons">-</span></div>
+        <div class="data-box"><span class="label">الحرارة المتوسطة</span><span class="value" id="p-temp">-</span></div>
         
         <p id="p-desc" class="description"></p>
         
-        <button class="close-btn" onclick="document.getElementById('side-panel').classList.remove('active')">Dismiss Report</button>
+        <button class="close-btn" onclick="document.getElementById('side-panel').classList.remove('active')">إغلاق التقرير</button>
     </div>
 
     <script src="script.js"></script>
