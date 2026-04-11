@@ -1,53 +1,127 @@
-// قاعدة بيانات الكواكب
+/**
+ * Planetary Knowledge Base
+ * Units: Distance (km), Moons (count), Temperature (Celsius)
+ */
 const planetsData = {
-    sun: { n: "الشمس", d: "0 كم", m: "0", t: "5,500°C", tx: "نجم النظام الشمسي الذي يمدنا بالضوء والحرارة." },
-    mercury: { n: "عطارد", d: "58 مليون كم", m: "0", t: "167°C", tx: "أصغر كوكب وأقربها للشمس، سطحه مليء بالفوهات." },
-    venus: { n: "الزهرة", d: "108 مليون كم", m: "0", t: "464°C", tx: "كوكب بركاني غلافه الجوي يحبس الحرارة بشكل هائل." },
-    earth: { n: "الأرض", d: "150 مليون كم", m: "1", t: "15°C", tx: "كوكب الحياة، يتميز بوجود الماء السائل وغلاف جوي مثالي." },
-    mars: { n: "المريخ", d: "228 مليون كم", m: "2", t: "-65°C", tx: "الكوكب الأحمر، يحتوي على جبال وبراكين هي الأضخم في النظام." },
-    jupiter: { n: "المشتري", d: "778 مليون كم", m: "95", t: "-110°C", tx: "أكبر كواكب المجموعة الشمسية وهو عملاق غازي." },
-    saturn: { n: "زحل", d: "1.4 مليار كم", m: "146", t: "-140°C", tx: "يتميز بنظام حلقاته الجليدية الرائع وأقماره الكثيرة." },
-    uranus: { n: "أورانوس", d: "2.8 مليار كم", m: "27", t: "-195°C", tx: "عملاق جليدي بارد يميل محور دورانه بشكل جانبي." },
-    neptune: { n: "نبتون", d: "4.5 مليار كم", m: "14", t: "-201°C", tx: "أبعد كوكب، لونه أزرق عميق ورياحه شديدة القوة." }
+    sun: { 
+        n: "The Sun", 
+        d: "0 km", 
+        m: "N/A", 
+        t: "5,500°C", 
+        tx: "A nearly perfect sphere of hot plasma at the center of our system, providing the energy that sustains life on Earth." 
+    },
+    mercury: { 
+        n: "Mercury", 
+        d: "58M km", 
+        m: "0", 
+        t: "167°C", 
+        tx: "The smallest planet and the closest to the Sun. It has a cratered surface similar to the Moon." 
+    },
+    venus: { 
+        n: "Venus", 
+        d: "108M km", 
+        m: "0", 
+        t: "464°C", 
+        tx: "Often called Earth's twin due to its size, but shrouded in a thick, toxic atmosphere that traps heat." 
+    },
+    earth: { 
+        n: "Earth", 
+        d: "150M km", 
+        m: "1", 
+        t: "15°C", 
+        tx: "Our home planet. It is the only place we know of so far that's inhabited by living things." 
+    },
+    mars: { 
+        n: "Mars", 
+        d: "228M km", 
+        m: "2", 
+        t: "-65°C", 
+        tx: "Known as the Red Planet. It features massive volcanoes and a desert-like, cold landscape." 
+    },
+    jupiter: { 
+        n: "Jupiter", 
+        d: "778M km", 
+        m: "95", 
+        t: "-110°C", 
+        tx: "The largest planet in our system. A gas giant with a Great Red Spot, a storm larger than Earth." 
+    },
+    saturn: { 
+        n: "Saturn", 
+        d: "1.4B km", 
+        m: "146", 
+        t: "-140°C", 
+        tx: "Adorned with a dazzling, complex system of icy rings, making it one of the most iconic planets." 
+    },
+    uranus: { 
+        n: "Uranus", 
+        d: "2.8B km", 
+        m: "27", 
+        t: "-195°C", 
+        tx: "An ice giant that is unique for rotating on its side, almost at a 90-degree angle." 
+    },
+    neptune: { 
+        n: "Neptune", 
+        d: "4.5B km", 
+        m: "14", 
+        t: "-201°C", 
+        tx: "The most distant major planet. It is dark, cold, and whipped by supersonic winds." 
+    }
 };
 
 /**
- * وظيفة عرض بيانات الكوكب في اللوحة الجانبية
- * @param {string} id - معرف الكوكب المختار
+ * Populates and displays the info panel for a selected planet
+ * @param {string} id - The planet identifier
  */
 function showPlanet(id) {
     const data = planetsData[id];
     
-    // تحديث المحتوى النصي داخل اللوحة
+    // UI Update Logic
     document.getElementById('p-name').innerText = data.n;
     document.getElementById('p-dist').innerText = data.d;
     document.getElementById('p-moons').innerText = data.m;
     document.getElementById('p-temp').innerText = data.t;
     document.getElementById('p-desc').innerText = data.tx;
     
-    // إظهار اللوحة بإضافة الكلاس النشط
+    // Panel Activation
     document.getElementById('side-panel').classList.add('active');
+
+    // Haptic feedback for mobile devices
+    if (window.navigator.vibrate) {
+        window.navigator.vibrate(15);
+    }
 }
 
 /**
- * توليد النجوم بشكل عشوائي في الخلفية عند تحميل الصفحة
+ * Generates a dynamic, twinkling star field in the background
  */
-const field = document.getElementById('star-field');
-for(let i=0; i<250; i++) {
-    let s = document.createElement('div');
-    s.style.position = 'absolute';
+function initUniverse() {
+    const field = document.getElementById('star-field');
+    const starCount = window.innerWidth < 768 ? 120 : 250;
     
-    // أحجام عشوائية للنجوم
-    let size = Math.random() * 2 + 'px';
-    s.style.width = size; 
-    s.style.height = size;
-    
-    s.style.background = '#fff'; 
-    // مواقع عشوائية
-    s.style.left = Math.random() * 100 + '%';
-    s.style.top = Math.random() * 100 + '%'; 
-    // شفافية عشوائية لإعطاء عمق
-    s.style.opacity = Math.random();
-    
-    field.appendChild(s);
+    for(let i=0; i < starCount; i++) {
+        const star = document.createElement('div');
+        star.className = 'star';
+        
+        const size = Math.random() * 2 + 'px';
+        star.style.width = size;
+        star.style.height = size;
+        
+        star.style.left = Math.random() * 100 + '%';
+        star.style.top = Math.random() * 100 + '%';
+        
+        // Randomize twinkle duration and delay for realism
+        star.style.setProperty('--duration', (Math.random() * 3 + 2) + 's');
+        star.style.animationDelay = Math.random() * 5 + 's';
+        
+        field.appendChild(star);
+    }
 }
+
+// Initialization on load
+window.onload = initUniverse;
+
+// Responsive recalculation on resize
+window.onresize = () => {
+    document.getElementById('star-field').innerHTML = '';
+    initUniverse();
+};
